@@ -89,6 +89,10 @@ class News extends Abstract_page {
 		return $this;
 	}
 	
+	/**
+		* The HTML in this class is subject to change. 
+		* However the general functionality is the same, just have to adapt certain areas!
+	*/
 	public function listAttachments(){
 		$this->get_page_id();
 		$this->runQuery('SELECT * FROM attachments WHERE postID = "' . $this->_news_id . '"');
