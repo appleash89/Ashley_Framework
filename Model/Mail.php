@@ -18,7 +18,13 @@ require_once("Validater.php");
 */
 
 class Mail extends Validater {
-
+	
+	/**
+		* @var firstname, surname, email, home, home1, mobile, message
+		* These properties are for the talk_to_us() example. These should be taken out when using 
+		* And put in to another class.
+		* They are still here just for a reminder to myself how to quickly referene creating this method. 
+	*/
 	public $success = false,
 		   $firstname,
 		   $surname,
@@ -26,11 +32,9 @@ class Mail extends Validater {
 		   $home,
 		   $home1,
 		   $mobile,
-		   $message,
-		   $show_contact = false,
-		   $show_boxes;
+		   $message;
 	
-	private $_recipent;
+	protected $_recipent;
 	
 	/**
 		* 
@@ -61,15 +65,19 @@ class Mail extends Validater {
 		* Recommended to put this kind of function in a seperate class.
 	*/
 	public function talk_to_us ($type) {
-		
+		// Validates the fields
 		$this->checkFieldExists(array("Please provide your firstname"=>'firstname',
 									  "Please provide your surname" => 'surname',
 									  "Please provide your email address" => 'email',
 									  "You missed out 'How can we help you?'" => 'message'))
 			->validateEmail('email');
+		// Checks there are no errors
 		if($this->work){
-			
+			// calls the get_email_recipent to store the protected property
 			$this->get_email_recipent();
+			
+			// Sets up a message. This was used for NHS breastfeeding for the two different
+			// Types of forms. This is just an example of how the message can be set up.
 			
 			$homephone = $_POST['home']  . ' ' . $_POST['home1'];
 			if($type == "proff"){
@@ -92,9 +100,12 @@ class Mail extends Validater {
 			}else{
 				$subject = "Breastfeeding: Talk To Us";
 			}
+			// Calls for the sendEmail() method
 			$this->sendEmail($this->_recipent, $subject , $message, $_POST['email'], ucwords($_POST['firstname']) . ' ' . ucwords($_POST['surname']));
+			// Sets the success property to be true - used in template to show or hide the form
 			$this->success = true;
 		}else{
+			// returns the values to show.
 			$this->firstname = $_POST['firstname'];
 			$this->surname = $_POST['surname'];
 			$this->email = $_POST['email'];
