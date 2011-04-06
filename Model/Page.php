@@ -2,7 +2,18 @@
 
 require_once("Abstract_page.php"); 
 
-/** Page for getting the general attributes of a page layout, and storing them as properties to be assigned to the View page. */
+/**
+	*
+	* Page class
+	*
+	* This page is defined by the class it extends, which is an abstract page.
+	* 
+	* The characteristics of the page class are id, title, content and image.
+	* Each of the methods are public and can pick and choose which to use in the controller.
+	*
+	* @author Ashley Banks
+	*
+*/
 
 class Page extends Abstract_page {
 	
@@ -13,8 +24,8 @@ class Page extends Abstract_page {
 		get_row:
 			Inherited from Abstract_page. Runs a query and sets the property in abstract_page @_row the array for other methods to grab.
 			@_row can only be accessed by other extended classes. Protected property.
-			@param $selector - select the page details by the urltitle
-			@return @_row
+			@param string $selector - select the page details by the urltitle
+			@return associative array of results
 	
 	*/
 	public function get_row ($selector) {
