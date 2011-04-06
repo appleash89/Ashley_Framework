@@ -1,0 +1,1 @@
+This directory: Cache - Holds all files that have been cached.

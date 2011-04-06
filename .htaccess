@@ -1,0 +1,29 @@
+RewriteEngine On
+
+RewriteRule ^(/)?$ /dev/index2.php?module=welcome [L,QSA]
+
+RewriteRule ^Admin(/)?$ /dev/Admin/index.php [L,QSA]
+
+RewriteRule ^title/([^/\.]+)/?$ index2.php?title=$1 [L]
+
+RewriteRule ^list/([^/\.]+)/page/([^/\.]+)/?$ index2.php?module=$1&page=$2 [L]
+
+RewriteRule ^category/([^/\.]+)/page/([^/\.]+)/?$ index2.php?category=$1&page=$2 [L]
+
+RewriteRule ^news/([^/\.]+)/?$ index2.php?news=$1 [L]
+
+RewriteRule ^([^/\.]+)/$ index2.php?module=$1 [L]
+
+RewriteRule ^news/(.*)/ index.php?module=$1&page=$2 [L]
+
+RewriteRule ^month/([^/\.]+)/year/([^/\.]+)/page/([^/\.]+)/?$ index2.php?month=$1&year=$2&page=$3 [L]
+
+RewriteRule ^reviews(/)?$ /reviews/ [R]
+
+RewriteRule ^welcome(/)?$ /welcome/ [R]
+RewriteRule ^getting-started(/)?$ /dev/getting-started/ [R]
+RewriteRule ^who-we-are(/)?$ /who-we-are/ [R]
+
+RewriteRule ^()/?$ $1.php?%{QUERY_STRING} [PT]
+
+modPagespeed off
