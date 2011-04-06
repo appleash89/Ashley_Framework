@@ -71,6 +71,7 @@ class Pagination extends something {
 						
 					}
 					// Set the max links to display ie. <<prev 1 2 3 4 5 next>>
+                                       // So basically this prevents the paginations from going on forever and looking ugly
 					$max_links = 5;
 					for($i = 0; $i < $max_links; $i++){
 						$newPage = $pageNo + $i;	
