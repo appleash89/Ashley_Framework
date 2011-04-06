@@ -2,18 +2,40 @@
 
 require_once 'Abstract_page.php'; 
 
-/** Class to handle the news article attributes. Extends Abstract class as they have common properties to a page. */
+/**
+	*
+	* News class
+	*
+	* As news article is technically a page, it extends abstract page; so that is can make the methods
+	* behave differently to Page class as this class is specifically for news articles
+	*
+	* @author Ashley Banks
+	*
+*/
 
 class News extends Abstract_page {
 	
-	/* Assign the class variables */
-	
+	/**
+		*
+		* The below properties are unique to only the News class. 
+		*
+		* @var date $news_date - The date the news was posted
+		* @var string $urltitle - This is the identifer that goes on the end of the query string.
+		* @var string $attachments - This is the listing of attachments if a News article has them. Used to display in template.
+		* @var time $news_time - The time the news was posted
+		*
+		* As this class extends Abstract_page it shares the other page properties of title, content and image.
+	*/
 	public $news_date,
 		   $urltitle,
 		   $attachments,
 		   $news_time,
 		   $show_boxes;
-		   
+	
+	/** 
+		* @var int $_news_id - private to just this class.
+		* Used to gain anything that uses news_id as a foreign key.
+	*/   
 	private $_news_id;
 	  
 	protected $_categories;
