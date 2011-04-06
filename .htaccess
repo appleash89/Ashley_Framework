@@ -1,23 +1,24 @@
+# .htaccess file for the framework. These are just example mod rewrite rules
 RewriteEngine On
-
-RewriteRule ^(/)?$ /dev/index2.php?module=welcome [L,QSA]
-
-RewriteRule ^Admin(/)?$ /dev/Admin/index.php [L,QSA]
-
-RewriteRule ^title/([^/\.]+)/?$ index2.php?title=$1 [L]
-
+# This rule assigns the default home page
+RewriteRule ^(/)?$ /index.php?module=welcome [L,QSA]
+# This is default home page for an admin system if there is one!
+RewriteRule ^Admin(/)?$ /Admin/index.php [L,QSA]
+# Use this one for news articles or anything that takes a variable, so title will take will be the page identifier
+RewriteRule ^title/([^/\.]+)/?$ index.php?title=$1 [L]
+# used for pagination.
 RewriteRule ^list/([^/\.]+)/page/([^/\.]+)/?$ index2.php?module=$1&page=$2 [L]
-
+# the variables can be changed, just an example of using two variables in a query string
 RewriteRule ^category/([^/\.]+)/page/([^/\.]+)/?$ index2.php?category=$1&page=$2 [L]
 
 RewriteRule ^news/([^/\.]+)/?$ index2.php?news=$1 [L]
-
+# This is the controller page. Taking in the query welcome. Will turn URL to www.test.com/welcome
 RewriteRule ^([^/\.]+)/$ index2.php?module=$1 [L]
 
 RewriteRule ^news/(.*)/ index.php?module=$1&page=$2 [L]
-
+# Another example of paginations
 RewriteRule ^month/([^/\.]+)/year/([^/\.]+)/page/([^/\.]+)/?$ index2.php?month=$1&year=$2&page=$3 [L]
-
+# Redirects. Redirects a user to the right page if is wrong.
 RewriteRule ^reviews(/)?$ /reviews/ [R]
 
 RewriteRule ^welcome(/)?$ /welcome/ [R]
@@ -26,4 +27,7 @@ RewriteRule ^who-we-are(/)?$ /who-we-are/ [R]
 
 RewriteRule ^()/?$ $1.php?%{QUERY_STRING} [PT]
 
+# 404 redirect. Just choose the path to direct the 404 too!
+ErrorDocument 404 /404page.html
+#mod page speed for caching. Turn on only when site goes lively unless you want to get very pissed off.
 modPagespeed off
