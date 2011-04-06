@@ -1,7 +1,23 @@
 <?php
-require_once("stormValidate.php");
+require_once("Validater.php");
 
-class Mail extends stormValidate {
+/**
+	*
+	* class Mail
+	*
+	* Used for handling Mail acitivies.
+	* Extends Validater class so to validate any Mail Forms.
+	*
+	* An example method has been put in place to show how this class can be used.
+	*
+	* Although this class is for handling the mail and getting the email recipent (used often in our projects)
+	* This class can be extended by another to keep the code tidy.
+	*
+	* @author Ashley Banks
+	*
+*/
+
+class Mail extends Validater {
 
 	public $success = false,
 		   $firstname,
@@ -16,6 +32,13 @@ class Mail extends stormValidate {
 	
 	private $_recipent;
 	
+	/**
+		* 
+		* get_email_recipent() - gets the reciepent that has been set in the admin section
+		*
+		* @return private recipent.
+		*
+	*/
 	public function get_email_recipent(){
 		$this->runQuery("SELECT email FROM emails WHERE pkID = '1'");
 		$row = $this->getResult();
@@ -23,6 +46,20 @@ class Mail extends stormValidate {
 		return $this;
 	}
 
+	/**
+		*
+		* talk_to_us() - This is an example method which is commonly used to handle a contact form.
+		*
+		* @param string - Takes a type of form if there is two areas of a site (Admin / Normal Users)
+		*
+		* Uses the validater class to do validations on the fields that need it in the front end
+		* Sets up a message to send
+		* Calls the method to mail the message off
+		* @returns success to be true to state 
+		* else statement @return the values of the fields so they are not reset
+		*
+		* Recommended to put this kind of function in a seperate class.
+	*/
 	public function talk_to_us ($type) {
 		
 		$this->checkFieldExists(array("Please provide your firstname"=>'firstname',
@@ -70,7 +107,19 @@ class Mail extends stormValidate {
 		return $this;
 		
 	}
-	
+	/**
+		* 
+		* sendEmail() - Sends an email to the recipent
+		*
+		* @param string recipent - This is where the email is sent to
+		* @param string subject - The subject to attach to the email
+		* @param string message - The content of the message to send
+		* @param string from_address - Who the email is from
+		* @param string from_name - The name of the sender, however this does not seem to work when used in the 'FROM: '??
+		*
+		* @access protected - to be used only by this class and extended.
+		*
+	*/
 	protected function sendEmail($recipient, $subject, $message, $from_address, $from_name){
 		$message = '<html><body>'.$message.'</body></html>';
 		$headers =  'From: '.$from_name. "\r\n" .
