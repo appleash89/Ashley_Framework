@@ -1,1 +1,3 @@
-HELLO WORLD!!!
+This is a little framework using Mustache as the tempting engine.
+
+Warning - The cache class has not been completely tested. So the Cache examples in Controller are only an example at the moment and an idea of how to logic will work.
